@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System.Linq;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using RogueSharp;
@@ -53,5 +54,12 @@ public class Player
     public void UpdatePlayerFieldOfView(IMap map)
     {
         map.ComputeFov(X, Y, 30, true);
+        foreach (Cell cell in map.GetAllCells().Cast<Cell>())
+        {
+            if (map.IsInFov(cell.X, cell.Y))
+            {
+                map.SetCellProperties(cell.X, cell.Y, cell.IsTransparent, cell.IsWalkable, true);
+            }
+        }
     }
 }

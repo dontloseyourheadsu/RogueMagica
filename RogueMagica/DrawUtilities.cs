@@ -12,7 +12,7 @@ public static class DrawUtilities
         int sizeOfSprites = 64;
         foreach (var cell in _map.GetAllCells().Cast<Cell>())
         {
-            if (!cell.IsInFov)
+            if (!cell.IsInFov && !cell.IsExplored)
             {
                 continue;
             }
